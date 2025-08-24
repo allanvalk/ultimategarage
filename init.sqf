@@ -1,0 +1,1 @@
+call compile preprocessFile "ultimateGarage\init.sqf";

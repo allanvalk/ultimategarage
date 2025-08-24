@@ -1,3 +1,4 @@
+// west garage items
 items_west_ground = [
 	["B_Truck_01_mover_F"],
 	["B_Truck_01_ammo_F"],
@@ -29,4 +30,38 @@ items_west_static = [
 	["B_Mortar_01_F"], 
 	["B_SAM_System_03_F"], 
 	["B_Radar_System_01_F"]
+];
+
+// east garage items
+items_east_ground = [
+	["B_Truck_01_mover_F"]
+];
+
+items_east_air = [
+	["B_Heli_Attack_01_dynamicLoadout_F"]
+];
+
+items_east_water = [
+	["B_Boat_Transport_01_F"]
+];
+
+items_east_static = [
+	["B_Mortar_01_F"]
+];
+
+// resistance garage items
+items_resistance_ground = [
+	["B_Truck_01_mover_F"]
+];
+
+items_resistance_air = [
+	["B_Heli_Attack_01_dynamicLoadout_F"]
+];
+
+items_resistance_water = [
+	["B_Boat_Transport_01_F"]
+];
+
+items_resistance_static = [
+	["B_Mortar_01_F"]
 ];

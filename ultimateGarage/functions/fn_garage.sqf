@@ -17,7 +17,7 @@ switch (_mode) do {
 
 	case "init": {
 		
-		_id = _object addAction
+		private _id = _object addAction
 		[
 			"Garage",
 			{
@@ -49,7 +49,7 @@ switch (_mode) do {
 
 		cutText ["", "BLACK OUT"];
 
-		_camera = "camera" camCreate (_location);
+		private _camera = "camera" camCreate (_location);
 		_camera cameraEffect ["Internal", "BACK"];
 		showCinemaBorder false;
 
@@ -63,8 +63,6 @@ switch (_mode) do {
 		_camera camSetRelPos [10,10,5];
 		_camera camCommit 3;
 
-		//
-
 		disableSerialization;
 
 		createDialog "ARES_garageDialog";
@@ -73,12 +71,12 @@ switch (_mode) do {
 		localNamespace setVariable ["ARES_garage_location", _location];
 		localNamespace setVariable ["ARES_garage_camera", _camera];
 
-		_ctrlList = (findDisplay 11000) displayCtrl 11001;
-		_ctrlGround = (findDisplay 11000) displayCtrl 11002;
-		_ctrlAir = (findDisplay 11000) displayCtrl 11003;
-		_ctrlWater = (findDisplay 11000) displayCtrl 11004;
-		_ctrlStatic = (findDisplay 11000) displayCtrl 11010;
-		_ctrlButtonSpawn = (findDisplay 11000) displayCtrl 11009;
+		private _ctrlList = (findDisplay 11000) displayCtrl 11001;
+		private _ctrlGround = (findDisplay 11000) displayCtrl 11002;
+		private _ctrlAir = (findDisplay 11000) displayCtrl 11003;
+		private _ctrlWater = (findDisplay 11000) displayCtrl 11004;
+		private _ctrlStatic = (findDisplay 11000) displayCtrl 11010;
+		private _ctrlButtonSpawn = (findDisplay 11000) displayCtrl 11009;
 
 		_ctrlButtonSpawn ctrlEnable false;
 
@@ -105,20 +103,19 @@ switch (_mode) do {
 				};
 			}
 		];
-
 	};
 
 	case "list": {
 		
-		_ctrlList = (findDisplay 11000) displayCtrl 11001;
-		_itemPrefab = call compile ("items_" + str (side player) + "_" + _type);
+		private _ctrlList = (findDisplay 11000) displayCtrl 11001;
+		private _itemPrefab = call compile ("items_" + str (side player) + "_" + _type);
 
 		localNamespace setVariable ["ARES_garage_prefab", _itemPrefab];
 
 		lbClear _ctrlList;
 
 		{
-			_index = _ctrlList lbAdd getText (configFile >> "CfgVehicles" >> (_x select 0) >> "displayName");
+			private _index = _ctrlList lbAdd getText (configFile >> "CfgVehicles" >> (_x select 0) >> "displayName");
 			_ctrlList lbSetPicture [_index, getText (configFile >> "CfgVehicles" >> (_x select 0) >> "Icon")];
 			_ctrlList lbSetPictureColor [_index, [1, 1, 1, 1]];
 		} forEach _itemPrefab;
@@ -130,15 +127,15 @@ switch (_mode) do {
 				deleteVehicle (localNamespace getVariable "ARES_garage_preview");
 			};
 
-			_itemPrefab = localNamespace getVariable "ARES_garage_prefab";
-			_location = localNamespace getVariable "ARES_garage_location";
-			_class = ((_itemPrefab select _selectedIndex) select 0);
+			private _itemPrefab = localNamespace getVariable "ARES_garage_prefab";
+			private _location = localNamespace getVariable "ARES_garage_location";
+			private _class = ((_itemPrefab select _selectedIndex) select 0);
 
-			_ctrlIcon = (findDisplay 11000) displayCtrl 11005;
-			_ctrlName = (findDisplay 11000) displayCtrl 11006;
-			_ctrlSpeed = (findDisplay 11000) displayCtrl 11007;
-			_ctrlLoad = (findDisplay 11000) displayCtrl 11008;
-			_ctrlButtonSpawn = (findDisplay 11000) displayCtrl 11009;
+			private _ctrlIcon = (findDisplay 11000) displayCtrl 11005;
+			private _ctrlName = (findDisplay 11000) displayCtrl 11006;
+			private _ctrlSpeed = (findDisplay 11000) displayCtrl 11007;
+			private _ctrlLoad = (findDisplay 11000) displayCtrl 11008;
+			private _ctrlButtonSpawn = (findDisplay 11000) displayCtrl 11009;
 
 			_ctrlIcon ctrlSetText getText (configFile >> "CfgVehicles" >> _class >> "Picture");
 			_ctrlName ctrlSetText getText (configFile >> "CfgVehicles" >> _class >> "displayName");
@@ -149,7 +146,7 @@ switch (_mode) do {
 
 			_ctrlButtonSpawn buttonSetAction format ["['spawn', %1, '%2', '%3'] spawn ARES_fnc_garage;", _location, "", _class];
 
-			_previewObject = createVehicleLocal [_class, _location, [], 0, "CAN_COLLIDE"];
+			private _previewObject = createVehicleLocal [_class, _location, [], 0, "CAN_COLLIDE"];
 			_previewObject enableSimulation false;
 
 			localNamespace setVariable ["ARES_garage_preview", _previewObject];
@@ -160,7 +157,7 @@ switch (_mode) do {
 
 	case "close": {
 		
-		_camera = localNamespace getVariable "ARES_garage_camera";
+		private _camera = localNamespace getVariable "ARES_garage_camera";
 
 		if (!isNull (localNamespace getVariable ["ARES_garage_preview", objNull])) then {
 			deleteVehicle (localNamespace getVariable "ARES_garage_preview");
@@ -181,7 +178,7 @@ switch (_mode) do {
 
 		waitUntil { isNull (localNamespace getVariable ["ARES_garage_preview", objNull]) };
 
-		_previewObject = createVehicle [_class, _location, [], 0, "NONE"];
+		private _previewObject = createVehicle [_class, _location, [], 0, "NONE"];
 
 		playSound "FD_CP_Clear_F";
 
